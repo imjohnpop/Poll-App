@@ -7,13 +7,13 @@
 @section('content')
     <header>
         <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <img class="img-fluid" src="" alt="profile_picture">
-                    <h2>{{ Auth::user()->name }}</h2>
+            <div class="row border border-info rounded py-2 bg-light mt-2">
+                <div class="col-4 text-right">
+                    <img class="img-fluid" width="150px"  height="150px" src="img/user-picture.png" alt="profile_picture" style="border-radius: 50%;">
+                    <h2 class="mr-4">{{ Auth::user()->name }}</h2>
                 </div>
-                <div class="col-8">
-                    <h1>Poll App</h1>
+                <div class="col-8 d-flex justify-content-left align-items-center">
+                    <h1 class="ml-5 pl-3 display-2">Poll App</h1>
                 </div>
             </div>
         </div>

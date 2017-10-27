@@ -19,21 +19,27 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 public_poll">
-                <h2>{{ $poll->poll_name}}</h2>
-                <form action="" method="post">
-                <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
-                @if($poll->nr_choice === 1)
-                    @foreach($choices as $choice)
-                        <input type="checkbox">{{ $choice->choice_text }}<br>
-                    @endforeach
-                @endif
-                @if($poll->nr_choice === 0)
-                    @foreach($choices as $choice)
-                        <input type="radio">{{ $choice->choice_text }}<br>
-                    @endforeach
-                @endif
-                    <input type="submit" value="Vote">
-                </form>
+                <div class="card mt-3 poll-shadow">
+                    <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
+                    <form action="" method="post">
+                        <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                @if($poll->nr_choice === 1)
+                                    @foreach($choices as $choice)
+                                        <input class="ml-auto my-auto" type="checkbox"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                    @endforeach
+                                @endif
+                                @if($poll->nr_choice === 0)
+                                    @foreach($choices as $choice)
+                                        <input class="ml-auto my-auto" type="radio"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                    @endforeach
+                                @endif
+                                <input type="submit" value="Vote">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="col-2"></div>        
         </div>
