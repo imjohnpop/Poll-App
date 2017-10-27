@@ -1,10 +1,11 @@
+
 @extends('wrapper')
 
 @section('page_title')
     Poll List | PollApp
 @endsection
 
-@section('content')
+@section('content') 
 <main>
     <h1>Poll list</h1>
     <section class="container">
@@ -35,6 +36,7 @@
                 <h2>{{ $poll->poll_name}}</h2>
                 <form action="" method="post">
                 @if($poll->nr_choice === 0)
+                    <?php $choices=\App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                     @foreach($choices as $choice)
                         <input type="checkbox">{{ $choice->choice_text }}<br>
                     @endforeach
