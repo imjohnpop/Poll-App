@@ -12,21 +12,49 @@ class listController extends Controller
     //
     public function list()
     {
-        $polls = Poll::get()->where('is_public', 1);
+        $polls = Poll::where('is_public', 1)->get();
         $choices = Choices::get();
 
         return view('poll/list', ['polls' => $polls, 'choices' => $choices]);
     }
 
-    public function vote($id)
+    public function new($id=null)
     {
-        $choice = Choice::findOrFail($id);
-        
-        $choice->fill(request()->only([
-            'nr_votes',
-        ]));
+        $view = view('poll/new');
 
-        $choice->save();
+        $poll = Poll::where('poll_id', $id)->get();
+        $view->poll = $poll[0];
+
+        return $view;
+    }
+
+    public function vote($id=null)
+    {
+        $choices=Choices::where('choice_to_poll', $id)->get();
+
+        if(request()->input('1') == 'on'){
+            $choices[1]->fill([
+            'nr_votes' => $this->nr_votes++
+        ]);
+        $choices[1]->save();        
+        }
+        
+        if(request()->input('2') == 'on'){
+            $choices[2]->fill([
+                'nr_votes' => $this->nr_votes++
+            ]);
+            $choices[2]->save();            
+        }
+
+        if(request()->input('3') == 'on'){
+            $choices[3]->fill([
+                'nr_votes' => $this->nr_votes++
+            ]);
+            $choices[3]->save();        
+        
+        }
+        //redirect
+        return redirect()->action('listController@list');
     }
     
     public function store($id = null) {
