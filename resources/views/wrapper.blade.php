@@ -49,6 +49,9 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ url('profile/' . Auth::user()->name) }}">My profil</a>
+                        </li>
                         @else
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">login</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerModal">register</a>
