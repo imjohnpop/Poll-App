@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'indexController@index');
+Route::get('/homepage', 'indexController@index');
 Route::get('/list', 'listController@list');
 
 Auth::routes();
