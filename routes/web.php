@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/homepage', 'indexController@index');
+Route::get('/', 'indexController@index');
 Route::get('/list', 'listController@list');
 Route::post('/list', 'listController@store');
 Route::get('/list/vote/{id}', 'listController@new');
@@ -24,9 +24,9 @@ Route::post('/profile', 'profileController@store');
 
 Auth::routes();
 
-Route::get('/', function () {
-    return redirect('/homepage');
+Route::get('/homepage', function () {
+    return redirect('/');
 });
 Route::get('/home', function () {
-    return redirect('/homepage');
+    return redirect('/');
 });
