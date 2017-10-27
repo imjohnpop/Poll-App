@@ -50,7 +50,7 @@
                             </form>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ url('profile/'}}">My profil</a>
+                            <a class="dropdown-item" href="{{ url('profile/')}}">My profil</a>
                         </li>
                         @else
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">login</a>
