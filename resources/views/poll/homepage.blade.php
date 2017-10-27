@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-6 mt-2">
-                    <img class="w-100" src="img/imac.png" alt="Imac page">
+                    <img class="w-100" src="/img/imac.png" alt="Imac page">
                 </div>
             </div>
         </div>
