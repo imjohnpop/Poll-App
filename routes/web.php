@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'indexController@index');
+Route::get('/list', 'listController@list');
 
 Auth::routes();
 
