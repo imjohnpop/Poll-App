@@ -69,10 +69,31 @@ class listController extends Controller
 
 
         $choice->fill([
-            'choice_text' => request()->input('question'),
+            'choice_text' => request()->input('option_one'),
             'choice_id' => 1,
             'choice_to_poll' => $poll->id
         ]);
+
+        if(request()->input('option_two') !== null){
+            $choice_two = new Choices();
+            $choice_two->fill([
+                'choice_text' => request()->input('option_two'),
+                'choice_id' => 1,
+                'choice_to_poll' => $poll->id
+            ]);
+            $choice_two->save();
+        }
+
+        if(request()->input('option_three') !== null){
+            $choice_three = new Choices();
+            $choice_three->fill([
+                'choice_text' => request()->input('option_three'),
+                'choice_id' => 1,
+                'choice_to_poll' => $poll->id
+            ]);
+            $choice_three->save();
+        }
+
 
         // save
 
