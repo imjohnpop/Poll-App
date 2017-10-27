@@ -78,24 +78,16 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="o1">Password</label>
+                        <label for="o1">Option one</label>
                         <input name="option_one" type="text" class="form-control" id="o1" placeholder="Add an option">
                     </div>
                     <div class="form-group">
-                        <label for="o2">Password</label>
+                        <label for="o2">Option two</label>
                         <input name="option_two" type="text" class="form-control" id="o2" placeholder="Add an option">
                     </div>
                     <div class="form-group">
-                        <label for="o3">Password</label>
+                        <label for="o3">Option three</label>
                         <input name="option_three" type="text" class="form-control" id="o3" placeholder="Add an option">
-                    </div>
-                    <div class="form-group">
-                        <label for="o4">Password</label>
-                        <input name="option_four" type="text" class="form-control" id="o4" placeholder="Add an option">
-                    </div>
-                    <div class="form-group">
-                        <label for="o5">Password</label>
-                        <input name="option_five" type="text" class="form-control" id="o5" placeholder="Add an option">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
