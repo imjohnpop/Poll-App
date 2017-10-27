@@ -2,3 +2,7 @@
     width: 90px;
     height: auto;
 }
+
+.poll-align {
+    align-self: flex-end;
+}

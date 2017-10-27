@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<?php var_dump($_SERVER['REQUEST_URI']); ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
         <div>
             <a class="navbar-brand" href="#">
@@ -21,7 +19,7 @@
         </div>
         <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/homepage') {echo 'active';};?>" href="{{ url('/homepage') }}">Home</a>
                 </li>
                 <li class="nav-item">
