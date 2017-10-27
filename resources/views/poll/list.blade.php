@@ -1,4 +1,3 @@
-
 @extends('wrapper')
 
 @section('page_title')
@@ -22,8 +21,8 @@
             <div class="col-8 public_poll">
                 <h2>{{ $poll->poll_name}}</h2>
                 <form action="" method="post">
+                <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                 @if($poll->nr_choice === 1)
-                    <?php $choices=\App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                     @foreach($choices as $choice)
                         <input type="checkbox">{{ $choice->choice_text }}<br>
                     @endforeach
