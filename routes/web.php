@@ -13,6 +13,7 @@
 
 Route::get('/homepage', 'indexController@index');
 Route::get('/list', 'listController@list');
+Route::post('/list', 'listController@vote');
 Route::get('/profile', 'profileController@show');
 
 Auth::routes();

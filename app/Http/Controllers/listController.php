@@ -16,4 +16,17 @@ class listController extends Controller
 
         return view('poll/list', ['polls' => $polls, 'choices' => $choices]);
     }
+
+    public function vote()
+    {
+        $request=request();
+        return $request;
+
+        $choice->fill(request()->only([
+            'nr_votes',
+        ]));
+
+        $choice->save();
+        return redirect()->action('listController@list');
+    }
 }

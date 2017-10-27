@@ -6,6 +6,9 @@
 
 @section('content') 
 <main>
+<?php
+var_dump($_POST);
+?>
     <h1>Poll list</h1>
     <section class="container">
         <div class="row">
@@ -24,12 +27,12 @@
                 <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                 @if($poll->nr_choice === 1)
                     @foreach($choices as $choice)
-                        <input type="checkbox">{{ $choice->choice_text }}<br>
+                        <input type="checkbox" name="option">{{ $choice->choice_text }}<br>
                     @endforeach
                 @endif
                 @if($poll->nr_choice === 0)
                     @foreach($choices as $choice)
-                        <input type="radio">{{ $choice->choice_text }}<br>
+                        <input type="radio" name="option">{{ $choice->choice_text }}<br>
                     @endforeach
                 @endif
                     <input type="submit" value="Vote">
