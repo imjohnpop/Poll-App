@@ -28,14 +28,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Choices::create([
-            'choices_id'=> 1,
+            'choice_id'=> 1,
             'choice_text'=>'A lot.',
             'choice_to_poll'=>1,
             'nr_votes'=>0
         ]);
 
         Choices::create([
-            'choices_id'=> 2,
+            'choice_id'=> 2,
             'choice_text'=>'Just a bit.',
             'choice_to_poll'=>1,
             'nr_votes'=>1
