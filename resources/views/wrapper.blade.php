@@ -28,6 +28,33 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if(Auth::check())
+                            {{ Auth::user()->name }}
+                        @else
+                        User's section
+                        @endif
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if(Auth::check())
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                        @else
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">login</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerModal">register</a>
+                        @endif
+                    </div>
+                </div>
             </ul>
         </div>
     </nav>
