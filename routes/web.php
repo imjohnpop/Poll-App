@@ -15,6 +15,9 @@ Route::get('/homepage', 'indexController@index');
 Route::get('/list', 'listController@list');
 Route::post('/list', 'listController@store');
 Route::get('/profile', 'profileController@show');
+Route::get('/profile/{idcko}', 'profileController@destroy');
+
+
 
 Auth::routes();
 
