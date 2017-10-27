@@ -6,9 +6,6 @@
 
 @section('content') 
 <main>
-<?php
-var_dump($_POST);
-?>
     <h1>Poll list</h1>
     <section class="container">
         <div class="row">
