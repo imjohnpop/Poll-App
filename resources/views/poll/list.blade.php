@@ -36,12 +36,12 @@
                 <form action="" method="post">
                 @if($poll->nr_choice === 0)
                     @foreach($choices as $choice)
-                        <input type="checkbox">{{ $choice->text }}<br>
+                        <input type="checkbox">{{ $choice->choice_text }}<br>
                     @endforeach
                 @endif
                 @if($poll->nr_choice === 1)
                     @foreach($choices as $choice)
-                        <input type="radio">{{ $choice->text }}<br>
+                        <input type="radio">{{ $choice->choice_text }}<br>
                     @endforeach
                 @endif
                     <input type="submit" value="Vote">
