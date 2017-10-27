@@ -8,12 +8,9 @@ class Choices extends Model
 {
     //
     protected $fillable = [
-        'text',
-        'poll_id',
-        'nr_votes'
-    ];
-
-    protected $guarded = [
-        'choices_id'
+        'choice_text',
+        'choice_to_poll',
+        'nr_votes',
+        'choice_id'
     ];
 }

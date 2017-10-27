@@ -17,6 +17,7 @@ class CreateVotesTable extends Migration
             $table->increments('vote_id');
             $table->integer('user_id');
             $table->integer('vote_to_poll');
+            $table->timestamps();
         });
     }
 

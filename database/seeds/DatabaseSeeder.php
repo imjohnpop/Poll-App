@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         
         Votes::create([
             'user_id' => 1,
-            'choice_id' => 2
+            'vote_to_poll' => 2
         ]);
 
         Choices::create([
