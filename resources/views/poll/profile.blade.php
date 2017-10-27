@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    <?php dd($data);?>
     <header>
         <div class="container">
             <div class="row">
@@ -13,7 +14,7 @@
                     <h2>{{ Auth::user()->name }}</h2>
                 </div>
                 <div class="col-8">
-                    <h1>title</h1>
+                    <h1>Poll App</h1>
                 </div>
             </div>
         </div>
@@ -27,14 +28,14 @@
                 </div>
                 <div class="col-2"></div>
             </div>
-            @foreach()
+            @foreach($data as $value)
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <div>
-                            <h3>{{ $poll->name }}</h3>
+                            <h3>{{ $value->name }}</h3>
                             @foreach()
-                                <p>{{ $poll->choice }}</p>
+                                <p>{{ $data[0]->choice }}</p>
                             @endforeach
                         </div>
                         <div>

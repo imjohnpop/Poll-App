@@ -14,11 +14,10 @@ class CreateChoicesTable extends Migration
     public function up()
     {
         Schema::create('choices', function (Blueprint $table) {
-            $table->increments('choices_id');
-            $table->string('text');
-            $table->integer('poll_id');
+            $table->integer('choice_id');
+            $table->string('choice_text');
+            $table->integer('choice_to_poll');
             $table->integer('nr_votes');
-            $table->timestamps();
         });
     }
 

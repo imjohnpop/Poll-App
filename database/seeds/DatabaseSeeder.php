@@ -17,26 +17,28 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         Poll::create([
             'user_id' => 1,
-            'poll_name' => 'How much do you like cookies?',
+            'poll_name' => 'How much do you like me?',
             'is_public' => 1,
             'nr_choice' => 0
         ]);
         
         Votes::create([
             'user_id' => 1,
-            'choice_id' => 1
+            'choice_id' => 2
         ]);
 
         Choices::create([
-            'text'=>'A great big lot.',
-            'poll_id'=>1,
+            'choices_id'=> 1,
+            'choice_text'=>'A lot.',
+            'choice_to_poll'=>1,
             'nr_votes'=>0
         ]);
 
         Choices::create([
-            'text'=>'Just a lot.',
-            'poll_id'=>1,
-            'nr_votes'=>0
+            'choices_id'=> 2,
+            'choice_text'=>'Just a bit.',
+            'choice_to_poll'=>1,
+            'nr_votes'=>1
         ]);
     }
 }
