@@ -1,7 +1,7 @@
 @extends('wrapper')
 
 @section('page_title')
-    <title>{{ Auth::user()->name }} | Poll App</title>
+    {{ Auth::user()->name }} | Poll App
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                    <button type="button" class="btn btn-primary">Add new question</button>
                 </div>
                 <div class="col-2"></div>
             </div>
@@ -45,18 +45,16 @@
                                     <div class="d-flex justify-content-between">
                                         <li class="card-text">{{ $choice->choice_text }}</li>
                                         <div class="progress w-50 poll-align">
-
-
                                             <!-- $number = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->where('choice_id', '=', $choice->choice_id)->get();-->
                                             <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
-                        <div>
-                            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                            <div class="ml-auto p-2">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                                <a type="button" href="{{action('profileController@destroy', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary">Delete</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-2"></div>
