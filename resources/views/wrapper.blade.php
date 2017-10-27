@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between border border-left-0 border-right-0 border-top-0 border-info">
         <div>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img class="icon-img" src="/img/pollapp-icon.png" alt=""> PollApp
             </a>
         </div>
