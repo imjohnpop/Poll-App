@@ -31,11 +31,18 @@
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <div>
-                            <h3>{{ $poll->poll_name }}</h3>
+                        <div class="card mt-3 poll-shadow">
+                            <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
                             <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                             @foreach($choices as $choice)
-                                <p>{{$choice->choice_text}}</p>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <li class="card-text">{{ $choice->choice_text }}</li>
+                                        <div class="progress w-50 poll-align">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
                         <div>
