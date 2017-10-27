@@ -17,5 +17,9 @@ Route::get('/profile/{name}', 'profileController@show');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/', function () {
+    return redirect('/homepage');
+});
+Route::get('/home', function () {
+    return redirect('/homepage');
+});
