@@ -25,9 +25,6 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/list') {echo 'active';};?>" href="{{ url('/list') }}">Polls</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if(Auth::check())
