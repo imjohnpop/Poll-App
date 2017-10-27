@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <?php dd($data);?>
     <header>
         <div class="container">
             <div class="row">
@@ -28,14 +27,15 @@
                 </div>
                 <div class="col-2"></div>
             </div>
-            @foreach($data as $value)
+            @foreach($polls as $poll)
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
                         <div>
-                            <h3>{{ $value->name }}</h3>
-                            @foreach()
-                                <p>{{ $data[0]->choice }}</p>
+                            <h3>{{ $poll->poll_name }}</h3>
+                            <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
+                            @foreach($choices as $choice)
+                                <p>{{$choice->choice_text}}</p>
                             @endforeach
                         </div>
                         <div>
