@@ -1,7 +1,7 @@
 @extends('wrapper')
 
 @section('page_title')
-    <title>{{ Auth::user()->name }} | Poll App</title>
+    {{ Auth::user()->name }} | Poll App
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add new question</button>
                 </div>
                 <div class="col-2"></div>
             </div>
@@ -45,23 +45,69 @@
                                     <div class="d-flex justify-content-between">
                                         <li class="card-text">{{ $choice->choice_text }}</li>
                                         <div class="progress w-50 poll-align">
-
-
                                             <!-- $number = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->where('choice_id', '=', $choice->choice_id)->get();-->
                                             <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
-                        <div>
-                            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                            <div class="ml-auto p-2">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                                <a type="button" href="{{action('profileController@destroy', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary">Delete</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-2"></div>
                 </div>
             @endforeach
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add new question</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="question">Name of the question</label>
+                                <input name="question" type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter a question">
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input name="public" type="checkbox" class="form-check-input checked">
+                                    Make it public?
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input name="multiple" type="checkbox" class="form-check-input">
+                                    Can user select more than one choice?
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="o1">Option one</label>
+                                <input name="option_one" type="text" class="form-control" id="o1" placeholder="Add an option">
+                            </div>
+                            <div class="form-group">
+                                <label for="o2">Option two</label>
+                                <input name="option_two" type="text" class="form-control" id="o2" placeholder="Add an option">
+                            </div>
+                            <div class="form-group">
+                                <label for="o3">Option three</label>
+                                <input name="option_three" type="text" class="form-control" id="o3" placeholder="Add an option">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 @endsection
