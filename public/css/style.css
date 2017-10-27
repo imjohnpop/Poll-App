@@ -10,3 +10,20 @@
 .poll-shadow {
     box-shadow: 5px 5px 5px #888888 !important;
 }
+i {
+    font-size: 30px !important;
+}
+.poll-plus-sign {
+    background: white;
+}
+.poll-plus-sign:hover {
+    box-shadow: 5px 5px 5px #888888 !important;
+}
+.poll-card {
+    position: relative;
+}
+.poll-badge {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+}

@@ -9,16 +9,20 @@
     <h1>Poll list</h1>
     <section class="container">
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add new question</button>
+            <div class="col-8 public_pol mx-auto">
+                <div class="card border border-primary rounded">
+                    <a type="button" class="poll-plus-sign" data-toggle="modal" data-target="#exampleModal">
+                    <div class="card-body text-center bg-primary">
+                        <i class="fa fa-plus text-white" aria-hidden="true"></i>
+                    </div>
+                    </a>
+                </div>
             </div>
-            <div class="col-2"></div>        
         </div>
         @foreach($polls as $poll)
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8 public_poll">
+
+            <div class="col-8 public_poll mx-auto">
                 <div class="card mt-3 poll-shadow">
                     <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
                     <form action="" method="post">
@@ -41,7 +45,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-2"></div>        
+
         </div>
         @endforeach
     </section>
