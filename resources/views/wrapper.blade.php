@@ -9,57 +9,73 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .btn,
+        #add,
+        input{
+            cursor: pointer;
+        }
+        li {
+            list-style-type: none;
+        }
+        div.add_bg {
+            background-color: #007bff !important;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between border border-left-0 border-right-0 border-top-0 border-info">
-        <div>
-            <a class="navbar-brand" href="/">
-                <img class="icon-img" src="/img/pollapp-icon.png" alt=""> PollApp
-            </a>
-        </div>
-        <div class="collapse navbar-collapse text-right" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/homepage') {echo 'active';};?>" href="{{ url('/homepage') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/list') {echo 'active';};?>" href="{{ url('/list') }}">Polls</a>
-                </li>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if(Auth::check())
-                            {{ Auth::user()->name }}
-                        @else
-                        User's section
-                        @endif
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @if(Auth::check())
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border border-left-0 border-right-0 border-top-0 border-info">
+        <div class="w-75 d-flex justify-content-between mx-auto">
+            <div>
+                <a class="navbar-brand" href="/">
+                    <img class="icon-img" src="/img/pollapp-icon.png" alt=""> PollApp
+                </a>
+            </div>
+            <div class="collapse navbar-collapse text-right" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/homepage') {echo 'active';};?>" href="{{ url('/homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == '/list') {echo 'active';};?>" href="{{ url('/list') }}">Polls</a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if(Auth::check())
+                                {{ Auth::user()->name }}
+                            @else
+                                User's section
+                            @endif
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @if(Auth::check())
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                                        Logout
+                                    </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ url('profile/')}}">My profil</a>
-                        </li>
-                        @else
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">login</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerModal">register</a>
-                        @endif
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('profile/')}}">My profil</a>
+                                </li>
+                            @else
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">login</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerModal">register</a>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    @yield('content')
+        @yield('content')
 
 
 <!-- Scripts: -->
