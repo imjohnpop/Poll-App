@@ -30,24 +30,30 @@
     </main>
 
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid border border-left-0 border-right-0 border-bottom-0 border-info mb-5">
             <div class="row bg-light">
                 <div class="col-8 mx-auto">
                     @foreach($data as $poll)
-                        <?php $choices = \App\Choices::where('choices.choice_to_poll', '=', $poll->poll_id)->get(); ?>
-
-                            <div class="card mt-3 poll-shadow">
+                        <?php $choices = \App\Choices::where('choices.choice_to_poll', '=', $poll->poll_id)->get(); $votes = []?>
+                            @foreach($choices as $choice)
+                                <?php $votes[]= $choice->nr_votes?>
+                            @endforeach
+                            <?php $nr_votes = array_sum($votes);?>
+                            <div class="card mt-3 poll-shadow poll-card">
                                 <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
+                                <span class="poll-badge"><h4><span class="badge badge-primary">{{ round($nr_votes) }} votes</span></h4></span>
+
                                 @foreach($choices as $choice)
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <li class="card-text">{{ $choice->choice_text }}</li>
                                         <div class="progress w-50 poll-align">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                            <div class="progress-bar" role="progressbar" style="width: <?php $width= ($choice->nr_votes / $nr_votes)*100; echo $width?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><?php $width= ($choice->nr_votes / $nr_votes)*100; echo round($width)?>%</div>
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
+
                             </div>
 
                     @endforeach
