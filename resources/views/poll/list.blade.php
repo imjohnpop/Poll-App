@@ -35,7 +35,7 @@
                                         <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_to_poll.$choice->choice_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
                                     @endforeach
                                 @endif
-                                <input type="submit" value="Vote">
+                                <button>Vote!</button>
                             </div>
                         </div>
                     </form>
