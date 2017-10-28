@@ -30,7 +30,7 @@
     </main>
 
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid border border-left-0 border-right-0 border-bottom-0 border-info mb-5">
             <div class="row bg-light">
                 <div class="col-8 mx-auto">
                     @foreach($data as $poll)
