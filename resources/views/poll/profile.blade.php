@@ -6,14 +6,14 @@
 
 @section('content')
     <header>
-        <div class="container">
+        <div class="container mt-2 mb-3">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
                     <div class="row border border-info rounded py-2 bg-light mt-2">
                         <div class="col-4 text-right">
                             <img class="img-fluid" width="150px"  height="150px" src="img/user-picture.png" alt="profile_picture" style="border-radius: 50%;">
-                            <h2 class="mr-4">{{ Auth::user()->name }}</h2>
+                            <h2 class="mr-3 pr-3">{{ Auth::user()->name }}</h2>
                         </div>
                         <div class="col-8 d-flex justify-content-left align-items-center">
                             <h1 class="ml-5 pl-3 display-2">Poll App</h1>
@@ -24,40 +24,55 @@
             </div>
         </div>
     </header>
-    <main>
+    <main class="mb-5">
         <div class="container">
             <div class="row mt-2">
-                <div class="col-8 public_pol mx-auto">
-                    <div class="card border border-primary rounded">
-                        <a type="button" class="poll-plus-sign" data-toggle="modal" data-target="#exampleModal">
-                            <div class="card-body text-center bg-primary">
+                <div class="col-2"></div>
+                <div class="col-8 public_pol">
+                    <div id="add" class="card border border-grey rounded">
+                        <a class="poll-plus-sign" data-toggle="modal" data-target="#exampleModal">
+                            <div class="card-body text-center w-100 btn btn-primary">
                                 <i class="fa fa-plus text-white" aria-hidden="true"></i>
                             </div>
                         </a>
                     </div>
                 </div>
+                <div class="col-2"></div>
             </div>
             @foreach($polls as $poll)
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
+                        <?php $choices = \App\Choices::where('choices.choice_to_poll', '=', $poll->poll_id)->get(); $votes = []?>
+                        @foreach($choices as $choice)
+                            <?php $votes[]= $choice->nr_votes?>
+                        @endforeach
+                        <?php $nr_votes = array_sum($votes);?>
                         <div class="card mt-3 poll-shadow">
                             <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
                             <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                             @foreach($choices as $choice)
-                                <div class="card-body">
+                                <div class="card-body  border border-grey">
                                     <div class="d-flex justify-content-between">
                                         <li class="card-text">{{ $choice->choice_text }}</li>
                                         <div class="progress w-50 poll-align">
-                                            <!-- $number = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->where('choice_id', '=', $choice->choice_id)->get();-->
-                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                            @if($nr_votes==0)
+                                                <div class="progress-bar mr-1" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>0%
+                                            @else
+                                                <div class="progress-bar mr-1" role="progressbar" style="width: <?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');;?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div><?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');?>%
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="ml-auto p-2">
-                                <button type="button" class="btn btn-primary">Edit</button>
-                                <a type="button" href="{{action('profileController@destroy', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary">Delete</a>
+                            <div class="d-flex flex-row justify-content-between">
+                                <div class="p-2">
+                                    <h4><span class="badge badge-primary">{{ round($nr_votes) }} votes</span></h4>
+                                </div>
+                                <div class="p-2">
+                                    <a class="btn btn-primary text-white">Edit</a>
+                                    <a href="{{action('profileController@destroy', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary">Delete</a>
+                                </div>
                             </div>
                         </div>
                     </div>

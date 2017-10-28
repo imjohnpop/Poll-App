@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Choices;
 use Illuminate\Http\Request;
 use App\Poll;
-use App\Choices;
 use Illuminate\Support\Facades\Auth;
 
 class listController extends Controller

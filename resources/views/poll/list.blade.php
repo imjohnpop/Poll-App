@@ -4,20 +4,40 @@
     Poll List | PollApp
 @endsection
 
-@section('content') 
-<main>
-    <h1>Poll list</h1>
+@section('content')
+<header>
+    <div class="container mt-2 mb-3">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="row border border-info rounded py-2 bg-light mt-2">
+                    <div class="col-4 text-right">
+                        <img class="img-fluid" width="150px"  height="150px" src="img/pollapp-icon.png" alt="logo_picture" style="border-radius: 50%;">
+                        <h2 class="mr-3">Poll App</h2>
+                    </div>
+                    <div class="col-8 d-flex justify-content-left align-items-center">
+                        <h1 class="ml-5 pl-3 display-3">List of Polls</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</header>
+<main class="mb-5">
     <section class="container">
         <div class="row">
-            <div class="col-8 public_pol mx-auto">
-                <div class="card border border-primary rounded">
-                    <a type="button" class="poll-plus-sign" data-toggle="modal" data-target="#exampleModal">
-                    <div class="card-body text-center bg-primary">
-                        <i class="fa fa-plus text-white" aria-hidden="true"></i>
-                    </div>
+            <div class="col-2"></div>
+            <div class="col-8 public_pol">
+                <div id="add" class="card border border-grey rounded">
+                    <a class="poll-plus-sign" data-toggle="modal" data-target="#exampleModal">
+                        <div class="card-body text-center w-100 btn btn-primary">
+                            <i class="fa fa-plus text-white" aria-hidden="true"></i>
+                        </div>
                     </a>
                 </div>
             </div>
+            <div class="col-2"></div>
         </div>
         @foreach($polls as $poll)
         <div class="row">
@@ -31,12 +51,12 @@
                             <div class="d-flex justify-content-between">
                                 @if($poll->nr_choice === 1)
                                     @foreach($choices as $choice)
-                                        <input class="ml-auto my-auto" type="checkbox" id="{{$choice->choice_to_poll.$choice->choice_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                        <input class="ml-auto my-auto" type="checkbox" id="{{$choice->choice_to_poll.$choice->choice_id}}" name="choice_check{{$poll->poll_id}}"><label class="ml-1 mr-auto my-auto">{{ $choice->choice_text }}</label>
                                     @endforeach
                                 @endif
                                 @if($poll->nr_choice === 0)
                                     @foreach($choices as $choice)
-                                        <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_to_poll.$choice->choice_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                        <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_to_poll.$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="ml-1 mr-auto my-auto">{{ $choice->choice_text }}</label>
                                     @endforeach
                                 @endif
                                 <button>Vote!</button>
