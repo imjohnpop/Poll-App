@@ -46,12 +46,12 @@
                                         <div class="d-flex justify-content-between">
                                             @if($poll->nr_choice === 1)
                                                 @foreach($choices as $choice)
-                                                    <input class="ml-auto my-auto" type="checkbox" id="{{$choice->choice_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                                    <input class="ml-auto my-auto" type="checkbox" id="{{$choice->choice_id}}" name="choice_check{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
                                                 @endforeach
                                             @endif
                                             @if($poll->nr_choice === 0)
                                                 @foreach($choices as $choice)
-                                                    <input class="ml-auto my-auto" name="radiooption" type="radio" id="{{$choice->choice_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                                    <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
                                                 @endforeach
                                             @endif
                                                 <button class="btn btn-primary" type="submit">Vote</button>
