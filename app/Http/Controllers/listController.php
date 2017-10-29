@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Choices;
+use App\Votes;
 use Illuminate\Http\Request;
 use App\Poll;
 use Illuminate\Support\Facades\Auth;
@@ -30,29 +31,35 @@ class listController extends Controller
 
     public function vote($id=null)
     {
-        $choices=Choices::where('choice_to_poll', $id)->get();
-
-        if(request()->input('1') == 'on'){
-            $choices[1]->fill([
-            'nr_votes' => $this->nr_votes++
+        $vote= new Votes;
+        $vote->fill([
+            'user_id' => Auth::user()->id,
+            'vote_to_poll' => $id
         ]);
-        $choices[1]->save();        
-        }
+        $vote->save();
+        // $choices=Choices::where('choice_to_poll', $id)->get();
+        // if(request()->input('choice_radio1') == 'on')
+        // {
+        //     $choices[1]->fill([
+        //     'nr_votes' => $this->nr_votes++
+        // ]);
+        // $choices[1]->save();        
+        // }
         
-        if(request()->input('2') == 'on'){
-            $choices[2]->fill([
-                'nr_votes' => $this->nr_votes++
-            ]);
-            $choices[2]->save();            
-        }
+        // if(request()->input('choice_radio2') == 'on'){
+        //     $choices[2]->fill([
+        //         'nr_votes' => $this->nr_votes++
+        //     ]);
+        //     $choices[2]->save();            
+        // }
 
-        if(request()->input('3') == 'on'){
-            $choices[3]->fill([
-                'nr_votes' => $this->nr_votes++
-            ]);
-            $choices[3]->save();        
+        // if(request()->input('3') == 'on'){
+        //     $choices[3]->fill([
+        //         'nr_votes' => $this->nr_votes++
+        //     ]);
+        //     $choices[3]->save();        
         
-        }
+        // }
         //redirect
         return redirect()->action('listController@list');
     }

@@ -14,8 +14,8 @@
 Route::get('/', 'indexController@index');
 Route::get('/list', 'listController@list');
 Route::post('/list', 'listController@store');
-Route::get('/list/vote/{id}', 'listController@new');
-Route::post('/list/vote/{id}', 'listController@vote');
+Route::get('/list/{id}', 'listController@list');
+Route::post('/list/{id}', 'listController@vote');
 Route::get('/profile', 'profileController@show');
 Route::get('/profile/{idcko}', 'profileController@destroy');
 Route::post('/profile', 'profileController@store');

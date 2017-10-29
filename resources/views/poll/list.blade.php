@@ -46,6 +46,7 @@
                 <div class="card mt-3 poll-shadow">
                     <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
                     <form action="" method="post">
+                    {!! csrf_field() !!}
                         <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -59,7 +60,7 @@
                                         <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_to_poll.$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="ml-1 mr-auto my-auto">{{ $choice->choice_text }}</label>
                                     @endforeach
                                 @endif
-                                <button>Vote!</button>
+                                <a href='{{action("listController@vote", ["id" => "$choice->choice_to_poll"])}}'><button type="submit" class="btn btn-primary">Submit</button></a>
                             </div>
                         </div>
                     </form>
