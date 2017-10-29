@@ -19,7 +19,7 @@
                                 <h2 class="mr-3">Poll App</h2>
                             </div>
                             <div class="col-8 d-flex justify-content-left align-items-center">
-                                <h1 class="ml-5 pl-3 display-3">Poll {{ $poll->poll_id }}</h1>
+                                <h1 class="ml-5 pl-3 display-5">{{ $poll->poll_name }}</h1>
                             </div>
                         </div>
                     </div>

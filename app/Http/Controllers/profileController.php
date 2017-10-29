@@ -39,7 +39,6 @@ class profileController extends Controller
     public function update($idcko) {
         $poll = Poll::where('poll_id', '=', $idcko)->first();
         $choices = Choices::where('choice_to_poll', '=', $idcko)->get();
-
         if(request()->input('public') == 'on'){
             $public = 1;
 
