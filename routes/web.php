@@ -16,10 +16,10 @@ Route::get('/list', 'listController@list');
 Route::post('/list', 'listController@store');
 Route::get('/poll/{id}', 'listController@view');
 Route::post('/poll/{id}', 'listController@vote');
-Route::get('/profile', 'profileController@show');
+Route::get('/profile', 'profileController@show')->middleware('auth');
 Route::post('/profile', 'profileController@store');
 Route::get('/profile/{idcko}', 'profileController@destroy');
-Route::get('/edit/{idcko}', 'profileController@edit_view');
+Route::get('/edit/{idcko}', 'profileController@edit_view')->middleware('auth');
 Route::post('/edit/{idcko}', 'profileController@update');
 
 

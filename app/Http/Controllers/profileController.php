@@ -37,7 +37,7 @@ class profileController extends Controller
     }
 
     public function update($idcko) {
-        $poll = Poll::where('poll_id', '=', $idcko)->get();
+        $poll = Poll::where('poll_id', '=', $idcko)->first();
         $choices = Choices::where('choice_to_poll', '=', $idcko)->get();
 
         if(request()->input('public') == 'on'){
@@ -53,10 +53,72 @@ class profileController extends Controller
 
         } else {
             $multiple = 0;
-
         }
 
+        $poll->update([
+            'poll_name' => request()->input('question'),
+            'is_public' => $public,
+            'nr_choice' => $multiple,
+            'user_id' => Auth::user()->id
+        ]);
+        $poll->save();
 
+        if(request()->input('option_one') !== null) {
+            if(isset($choices[0])) {
+                $choices[0]->update([
+                    'choice_text' => request()->input('option_one'),
+                    'choice_id' => 1,
+                    'choice_to_poll' => $poll->poll_id
+                ]);
+                $choices[0]->save();
+            } else {
+                $choices[0] = new Choices();
+                $choices[0]->fill([
+                    'choice_text' => request()->input('option_three'),
+                    'choice_id' => 1,
+                    'choice_to_poll' => $poll->poll_id
+                ]);
+                $choices[0]->save();
+            }
+        }
+
+        if(request()->input('option_two') !== null){
+            if(isset($choices[1])) {
+                $choices[1]->update([
+                    'choice_text' => request()->input('option_two'),
+                    'choice_id' => 2,
+                    'choice_to_poll' => $poll->poll_id
+                ]);
+                $choices[1]->save();
+            } else {
+                $choices[1] = new Choices();
+                $choices[1]->fill([
+                    'choice_text' => request()->input('option_three'),
+                    'choice_id' => 2,
+                    'choice_to_poll' => $poll->poll_id
+                ]);
+                $choices[1]->save();
+            }
+        }
+
+        if(request()->input('option_three') !== null){
+            if(isset($choices[2])) {
+                $choices[2]->update([
+                    'choice_text' => request()->input('option_three'),
+                    'choice_id' => 3,
+                    'choice_to_poll' => $poll->poll_id
+                ]);
+                $choices[2]->save();
+            } else {
+                $choices[2] = new Choices();
+                $choices[2]->fill([
+                    'choice_text' => request()->input('option_three'),
+                    'choice_id' => 3,
+                    'choice_to_poll' => $poll->id
+                ]);
+                $choices[2]->save();
+            }
+        }
 
         return redirect()->action('profileController@show');
     }
@@ -86,7 +148,6 @@ class profileController extends Controller
         } else {
             //prepare new object
             $poll = new Poll();
-            $choice = new Choices();
         }
 
 
@@ -105,7 +166,7 @@ class profileController extends Controller
             $choice_one->fill([
                 'choice_text' => request()->input('option_one'),
                 'choice_id' => 1,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_one->save();
         }
@@ -115,7 +176,7 @@ class profileController extends Controller
             $choice_two->fill([
                 'choice_text' => request()->input('option_two'),
                 'choice_id' => 2,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_two->save();
         }
@@ -125,15 +186,11 @@ class profileController extends Controller
             $choice_three->fill([
                 'choice_text' => request()->input('option_three'),
                 'choice_id' => 3,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_three->save();
         }
 
-
-        // save
-
-        $choice->save();
 
         // inform user about success
 

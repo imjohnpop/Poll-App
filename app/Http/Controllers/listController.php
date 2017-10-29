@@ -42,23 +42,7 @@ class listController extends Controller
             $votes = $votes + 1;
             $choices[1]->fill([
             'nr_votes' => $votes
-        ]);
-        // $choices[1]->save();        
-        // }
-        
-        // if(request()->input('choice_radio2') == 'on'){
-        //     $choices[2]->fill([
-        //         'nr_votes' => $this->nr_votes++
-        //     ]);
-        //     $choices[2]->save();            
-        // }
-
-        // if(request()->input('3') == 'on'){
-        //     $choices[3]->fill([
-        //         'nr_votes' => $this->nr_votes++
-        //     ]);
-        //     $choices[3]->save();        
-        
+            ]);
         }
         //redirect
         return redirect()->action('listController@list');
@@ -106,7 +90,7 @@ class listController extends Controller
             $choice_one->fill([
                 'choice_text' => request()->input('option_one'),
                 'choice_id' => 1,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_one->save();
         }
@@ -116,7 +100,7 @@ class listController extends Controller
             $choice_two->fill([
                 'choice_text' => request()->input('option_two'),
                 'choice_id' => 2,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_two->save();
         }
@@ -126,7 +110,7 @@ class listController extends Controller
             $choice_three->fill([
                 'choice_text' => request()->input('option_three'),
                 'choice_id' => 3,
-                'choice_to_poll' => $poll->id
+                'choice_to_poll' => $poll->poll_id
             ]);
             $choice_three->save();
         }

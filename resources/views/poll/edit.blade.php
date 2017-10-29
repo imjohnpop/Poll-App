@@ -27,12 +27,12 @@
                 </div>
             </div>
         </header>
-        <main>
+        <main class="mb-5">
             <section class="container">
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8 public_poll">
-                        <div class="card mt-3 poll-shadow">
+                        <div class="card mt-3 poll-shadow p-3">
                             <form method="post" action="">
                                 {{csrf_field()}}
                                 <div class="form-group">
@@ -67,6 +67,12 @@
                                         <input name="option_<?= $number;?>" type="text" class="form-control" id="o{{$choice->choice_id}}" placeholder="Add an option" value="{{$choice->choice_text}}">
                                     </div>
                                 @endforeach
+                                @if(empty($choices[2]))
+                                    <div class="form-group">
+                                        <label for="o3">Option three</label>
+                                        <input name="option_three" type="text" class="form-control" id="o3" placeholder="Add an option" value="">
+                                    </div>
+                                @endif
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

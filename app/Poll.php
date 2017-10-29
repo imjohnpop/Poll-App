@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Poll extends Model
 {
     //
+    protected $primaryKey = 'poll_id';
+
     protected $fillable = [
         'user_id',
         'poll_name',
@@ -18,4 +20,7 @@ class Poll extends Model
         'poll_id'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
