@@ -29,20 +29,9 @@
         </header>
         @if(Auth::check())
             <?php
-                $id = $poll->poll_id;
-                $current=Auth::user()->id;
-                $answered=\App\Votes::where('user_id', '=', $current)->get();
-                foreach ($answered as $val)
-                {
-                    if($val->vote_to_poll == $id)
-                    {
-                        $answer = false;
-                    }else{
-                        $answer = true;
-                    }
-                }
+                $current=Illuminate\Support\Facades\Auth::user()->id;
             ?>
-            @if($answer)
+            @if($poll->voted($current))
             <main>
                 <section class="container">
                     <div class="row">

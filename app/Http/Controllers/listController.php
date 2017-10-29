@@ -35,15 +35,15 @@ class listController extends Controller
             'vote_to_poll' => $id
         ]);
         $vote->save();
-        $choices=Choices::where('choice_to_poll', $id)->get();
-        if(request()->input('1') == 'on')
-        {
-            $votes = $choices[1]->value('nr_votes');
-            $votes = $votes + 1;
-            $choices[1]->fill([
-            'nr_votes' => $votes
-            ]);
-        }
+        // $choices=Choices::where('choice_to_poll', $id)->get();
+        //if(request()->input('1') == 'on')
+        //{
+        //    $votes = $choices[1]->value('nr_votes');
+        //    $votes = $votes + 1;
+        //    $choices[1]->fill([
+        //    'nr_votes' => $votes
+        //    ]);
+        //}
         //redirect
         return redirect()->action('listController@list');
     }
