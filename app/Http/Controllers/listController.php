@@ -18,13 +18,11 @@ class listController extends Controller
         return view('poll/list', ['polls' => $polls, 'choices' => $choices]);
     }
 
-    public function new($id=null)
+    public function view($id)
     {
-        $view = view('poll/new');
-
-        $poll = Poll::where('poll_id', $id)->get();
-        $view->poll = $poll[0];
-
+        $view = view('poll/poll');
+        $polls = Poll::where('poll_id', '=', $id)->get();
+        $view->polls = $polls;
         return $view;
     }
 
@@ -95,18 +93,21 @@ class listController extends Controller
         ]);
         $poll->save();
 
-
-        $choice->fill([
-            'choice_text' => request()->input('option_one'),
-            'choice_id' => 1,
-            'choice_to_poll' => $poll->id
-        ]);
+        if(request()->input('option_one') !== null) {
+            $choice_one = new Choices();
+            $choice_one->fill([
+                'choice_text' => request()->input('option_one'),
+                'choice_id' => 1,
+                'choice_to_poll' => $poll->id
+            ]);
+            $choice_one->save();
+        }
 
         if(request()->input('option_two') !== null){
             $choice_two = new Choices();
             $choice_two->fill([
                 'choice_text' => request()->input('option_two'),
-                'choice_id' => 1,
+                'choice_id' => 2,
                 'choice_to_poll' => $poll->id
             ]);
             $choice_two->save();
@@ -116,7 +117,7 @@ class listController extends Controller
             $choice_three = new Choices();
             $choice_three->fill([
                 'choice_text' => request()->input('option_three'),
-                'choice_id' => 1,
+                'choice_id' => 3,
                 'choice_to_poll' => $poll->id
             ]);
             $choice_three->save();

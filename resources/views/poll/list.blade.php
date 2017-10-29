@@ -44,7 +44,7 @@
 
             <div class="col-8 public_poll mx-auto">
                 <div class="card mt-3 poll-shadow">
-                    <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
+                    <h4 class="card-header text-center"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
                     <form action="" method="post">
                         <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                         <div class="card-body">
@@ -59,7 +59,7 @@
                                         <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_to_poll.$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="ml-1 mr-auto my-auto">{{ $choice->choice_text }}</label>
                                     @endforeach
                                 @endif
-                                <button>Vote!</button>
+                                    <button class="btn btn-primary" type="submit">Vote</button>
                             </div>
                         </div>
                     </form>

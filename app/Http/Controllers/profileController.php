@@ -29,6 +29,38 @@ class profileController extends Controller
         return redirect()->action('profileController@show');
     }
 
+    public function edit_view($idcko) {
+        $view = view('poll/edit');
+        $polls = Poll::where('poll_id', '=', $idcko)->get();
+        $view->polls = $polls;
+        return $view;
+    }
+
+    public function update($idcko) {
+        $poll = Poll::where('poll_id', '=', $idcko)->get();
+        $choices = Choices::where('choice_to_poll', '=', $idcko)->get();
+
+        if(request()->input('public') == 'on'){
+            $public = 1;
+
+        } else {
+            $public = 0;
+
+        }
+
+        if(request()->input('multiple') == 'on'){
+            $multiple = 1;
+
+        } else {
+            $multiple = 0;
+
+        }
+
+
+
+        return redirect()->action('profileController@show');
+    }
+
     public function store($id = null) {
 
 
@@ -68,17 +100,21 @@ class profileController extends Controller
         $poll->save();
 
 
-        $choice->fill([
-            'choice_text' => request()->input('option_one'),
-            'choice_id' => 1,
-            'choice_to_poll' => $poll->id
-        ]);
+        if(request()->input('option_one') !== null) {
+            $choice_one = new Choices();
+            $choice_one->fill([
+                'choice_text' => request()->input('option_one'),
+                'choice_id' => 1,
+                'choice_to_poll' => $poll->id
+            ]);
+            $choice_one->save();
+        }
 
         if(request()->input('option_two') !== null){
             $choice_two = new Choices();
             $choice_two->fill([
                 'choice_text' => request()->input('option_two'),
-                'choice_id' => 1,
+                'choice_id' => 2,
                 'choice_to_poll' => $poll->id
             ]);
             $choice_two->save();
@@ -88,7 +124,7 @@ class profileController extends Controller
             $choice_three = new Choices();
             $choice_three->fill([
                 'choice_text' => request()->input('option_three'),
-                'choice_id' => 1,
+                'choice_id' => 3,
                 'choice_to_poll' => $poll->id
             ]);
             $choice_three->save();
