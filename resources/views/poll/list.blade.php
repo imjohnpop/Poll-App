@@ -39,22 +39,11 @@
             </div>
             <div class="col-2"></div>
         </div>
+        <?php
+            $current=Illuminate\Support\Facades\Auth::user()->id;
+        ?>
         @foreach($polls as $poll)
-            <?php
-                $id = $poll->poll_id;
-                $current=Illuminate\Support\Facades\Auth::user()->id;
-                $answered=\App\Votes::where('user_id', '=', $current)->get();
-                foreach ($answered as $val)
-                {
-                    if($val->vote_to_poll == $id)
-                    {
-                        $answer = false;
-                    }else{
-                        $answer = true;
-                    }
-                }
-            ?>
-            @if($answer)
+            @if($poll->voted($current))
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
@@ -92,9 +81,9 @@
                             <?php $votes[]= $choice->nr_votes?>
                         @endforeach
                         <?php $nr_votes = array_sum($votes);?>
-                        <div class="card mt-3">
+                        <div class="card mt-3 poll-shadow poll-card">
                             <div class="card-header d-flex justify-content-between py-2">
-                                <h4 class="text-center"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
+                                <h4 class=" py-1">{{ $poll->poll_name }}</h4>
                                 <span class="badge badge-primary"><h5 class="pt-1">{{ round($nr_votes) }} votes</h5></span>
                             </div>
                             @foreach($choices as $choice)
