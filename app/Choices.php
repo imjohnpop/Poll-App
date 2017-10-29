@@ -8,9 +8,9 @@ class Choices extends Model
 {
     //
     protected $fillable = [
+        'choice_id',
         'choice_text',
         'choice_to_poll',
-        'nr_votes',
-        'choice_id'
+        'nr_votes'
     ];
 }

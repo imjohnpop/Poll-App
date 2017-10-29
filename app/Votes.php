@@ -9,7 +9,7 @@ class Votes extends Model
     //
     protected $fillable = [
         'user_id',
-        'votes_to_poll'
+        'vote_to_poll'
     ];
 
     protected $guarded = [

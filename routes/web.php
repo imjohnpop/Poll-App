@@ -14,11 +14,13 @@
 Route::get('/', 'indexController@index');
 Route::get('/list', 'listController@list');
 Route::post('/list', 'listController@store');
-Route::get('/list/{id}', 'listController@list');
-Route::post('/list/{id}', 'listController@vote');
+Route::get('/poll/{id}', 'listController@view');
+Route::post('/poll/{id}', 'listController@vote');
 Route::get('/profile', 'profileController@show');
-Route::get('/profile/{idcko}', 'profileController@destroy');
 Route::post('/profile', 'profileController@store');
+Route::get('/profile/{idcko}', 'profileController@destroy');
+Route::get('/edit/{idcko}', 'profileController@edit_view');
+Route::post('/edit/{idcko}', 'profileController@update');
 
 
 

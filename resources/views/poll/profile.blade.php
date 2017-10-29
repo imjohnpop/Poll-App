@@ -49,7 +49,7 @@
                         @endforeach
                         <?php $nr_votes = array_sum($votes);?>
                         <div class="card mt-3 poll-shadow">
-                            <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
+                            <h4 class="card-header text-center"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
                             <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
                             @foreach($choices as $choice)
                                 <div class="card-body  border border-grey">
@@ -70,7 +70,7 @@
                                     <h4><span class="badge badge-primary">{{ round($nr_votes) }} votes</span></h4>
                                 </div>
                                 <div class="p-2">
-                                    <a class="btn btn-primary text-white">Edit</a>
+                                    <a href="{{action('profileController@edit_view', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary text-white">Edit</a>
                                     <a href="{{action('profileController@destroy', ["idcko" => "$poll->poll_id"])}}" class="btn btn-primary">Delete</a>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input name="public" type="checkbox" class="form-check-input checked">
+                                    <input name="public" type="checkbox" class="form-check-input" checked>
                                     Make it public?
                                 </label>
                             </div>
