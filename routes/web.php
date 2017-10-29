@@ -22,8 +22,6 @@ Route::get('/profile/{idcko}', 'profileController@destroy');
 Route::get('/edit/{idcko}', 'profileController@edit_view')->middleware('auth');
 Route::post('/edit/{idcko}', 'profileController@update');
 
-
-
 Auth::routes();
 
 Route::get('/homepage', function () {
