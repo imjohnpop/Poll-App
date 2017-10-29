@@ -26,6 +26,7 @@
 </header>
 <main class="mb-5">
     <section class="container">
+        @if(Auth::check())
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 public_pol">
@@ -39,7 +40,6 @@
             </div>
             <div class="col-2"></div>
         </div>
-        @if(Auth::check())
             <?php
                 $current=Illuminate\Support\Facades\Auth::user()->id;
             ?>
