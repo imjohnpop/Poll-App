@@ -57,8 +57,8 @@
             @if($answer)
                 <div class="row">
                     <div class="col-2"></div>
-                    <div class="col-8 public_poll">
-                        <div class="card mt-3 poll-shadow">
+                    <div class="col-8">
+                        <div class="card mt-3">
                             <h4 class="card-header text-center"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
                             <form action="{{action('listController@vote', ['id' => $poll->poll_id])}}" method="post">
                             {!! csrf_field() !!}
@@ -84,38 +84,36 @@
                     <div class="col-2"></div>
                 </div>
             @else
-                <div class="container-fluid border border-left-0 border-right-0 border-bottom-0 border-info">
-                    <div class="row bg-light">
-                        <div class="col-2"></div>
-                        <div class="col-8">
-                            <?php $choices = \App\Choices::where('choices.choice_to_poll', '=', $poll->poll_id)->get(); $votes = []?>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <?php $choices = \App\Choices::where('choices.choice_to_poll', '=', $poll->poll_id)->get(); $votes = []?>
+                        @foreach($choices as $choice)
+                            <?php $votes[]= $choice->nr_votes?>
+                        @endforeach
+                        <?php $nr_votes = array_sum($votes);?>
+                        <div class="card mt-3">
+                            <div class="card-header d-flex justify-content-between py-2">
+                                <h4 class="text-center"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
+                                <span class="badge badge-primary"><h5 class="pt-1">{{ round($nr_votes) }} votes</h5></span>
+                            </div>
                             @foreach($choices as $choice)
-                                <?php $votes[]= $choice->nr_votes?>
-                            @endforeach
-                            <?php $nr_votes = array_sum($votes);?>
-                            <div class="card mt-3 poll-shadow poll-card">
-                                <div class="card-header d-flex justify-content-between py-2">
-                                    <h4 class=" py-1">{{ $poll->poll_name }}</h4>
-                                    <span class="badge badge-primary"><h5 class="pt-1">{{ round($nr_votes) }} votes</h5></span>
-                                </div>
-                                @foreach($choices as $choice)
-                                    <div class="card-body border border-grey">
-                                        <div class="d-flex justify-content-between">
-                                            <li class="card-text">{{ $choice->choice_text }}</li>
-                                            <div class="progress w-50 poll-align">
-                                                @if($nr_votes==0)
-                                                    <div class="progress-bar mr-1" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>0%
-                                                @else
-                                                    <div class="progress-bar mr-1" role="progressbar" style="width: <?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');;?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div><?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');?>%
-                                                @endif
-                                            </div>
+                                <div class="card-body border border-grey">
+                                    <div class="d-flex justify-content-between">
+                                        <li class="card-text">{{ $choice->choice_text }}</li>
+                                        <div class="progress w-50 poll-align">
+                                            @if($nr_votes==0)
+                                                <div class="progress-bar mr-1" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>0%
+                                            @else
+                                                <div class="progress-bar mr-1" role="progressbar" style="width: <?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');;?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div><?php $width= ($choice->nr_votes / $nr_votes)*100; echo number_format((float)$width, 2, '.', '');?>%
+                                            @endif
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="col-2"></div>
                     </div>
+                    <div class="col-2"></div>
                 </div>
             @endif
         @endforeach
