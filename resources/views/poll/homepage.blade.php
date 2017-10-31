@@ -39,7 +39,7 @@
                                 <?php $votes[]= $choice->nr_votes?>
                             @endforeach
                             <?php $nr_votes = array_sum($votes);?>
-                            <div class="card mt-3 poll-shadow poll-card">
+                            <div class="card border border-primary mt-3 poll-shadow poll-card">
                                 <div class="card-header d-flex justify-content-between py-2">
                                     <h4 class=" py-1"><a class="text-dark" href="{{action('listController@view', ["idcko" => "$poll->poll_id"])}}">{{ $poll->poll_name }}</a></h4>
                                     <span class="badge badge-primary"><h5 class="pt-1">{{ round($nr_votes) }} votes</h5></span>

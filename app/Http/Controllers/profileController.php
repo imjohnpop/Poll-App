@@ -64,7 +64,10 @@ class profileController extends Controller
 
         if(request()->input('option_one') !== null) {
             if(isset($choices[0])) {
-                $choices[0]->update([
+                $choices[0]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 1]
+                ])->update([
                     'choice_text' => request()->input('option_one'),
                     'choice_id' => 1,
                     'choice_to_poll' => $poll->poll_id
@@ -72,7 +75,10 @@ class profileController extends Controller
                 $choices[0]->save();
             } else {
                 $choices[0] = new Choices();
-                $choices[0]->fill([
+                $choices[0]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 1]
+                ])->fill([
                     'choice_text' => request()->input('option_three'),
                     'choice_id' => 1,
                     'choice_to_poll' => $poll->poll_id
@@ -83,7 +89,10 @@ class profileController extends Controller
 
         if(request()->input('option_two') !== null){
             if(isset($choices[1])) {
-                $choices[1]->update([
+                $choices[1]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 2]
+                ])->update([
                     'choice_text' => request()->input('option_two'),
                     'choice_id' => 2,
                     'choice_to_poll' => $poll->poll_id
@@ -91,7 +100,10 @@ class profileController extends Controller
                 $choices[1]->save();
             } else {
                 $choices[1] = new Choices();
-                $choices[1]->fill([
+                $choices[1]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 2]
+                ])->fill([
                     'choice_text' => request()->input('option_three'),
                     'choice_id' => 2,
                     'choice_to_poll' => $poll->poll_id
@@ -102,7 +114,10 @@ class profileController extends Controller
 
         if(request()->input('option_three') !== null){
             if(isset($choices[2])) {
-                $choices[2]->update([
+                $choices[2]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 3]
+                ])->update([
                     'choice_text' => request()->input('option_three'),
                     'choice_id' => 3,
                     'choice_to_poll' => $poll->poll_id
@@ -110,7 +125,10 @@ class profileController extends Controller
                 $choices[2]->save();
             } else {
                 $choices[2] = new Choices();
-                $choices[2]->fill([
+                $choices[2]->where([
+                    ['choice_to_poll', $idcko],
+                    ['choice_id', 3]
+                ])->fill([
                     'choice_text' => request()->input('option_three'),
                     'choice_id' => 3,
                     'choice_to_poll' => $poll->id

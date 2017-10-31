@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8 public_poll">
-                        <div class="card mt-3 poll-shadow p-3">
+                        <div class="card  border border-primary mt-3 poll-shadow p-3">
                             <form method="post" action="">
                                 {{csrf_field()}}
                                 <div class="form-group">

@@ -7,6 +7,7 @@ use App\Votes;
 use Illuminate\Http\Request;
 use App\Poll;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class listController extends Controller
 {
@@ -36,7 +37,7 @@ class listController extends Controller
             'vote_to_poll' => $id
         ]);
         $vote->save();
-        
+
         //Retrieve the nr of choices from the choice selected and add 1
         
         $choices= Choices::where('choice_to_poll', $id)->get();
@@ -88,6 +89,7 @@ class listController extends Controller
             ]);
             $choices[2]->save();            
         }
+
         return redirect()->action('listController@list');
     }
     
