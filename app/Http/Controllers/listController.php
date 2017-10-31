@@ -27,24 +27,67 @@ class listController extends Controller
         return $view;
     }
 
-    public function vote($id=null, Request $request)
+    public function vote(Request $request, $id=null)
     {
+        //Create a new vote in the votes table
         $vote= new Votes;
         $vote->fill([
             'user_id' => Auth::user()->id,
             'vote_to_poll' => $id
         ]);
         $vote->save();
-        // $choices=Choices::where('choice_to_poll', $id)->get();
-        //if(request()->input('1') == 'on')
-        //{
-        //    $votes = $choices[1]->value('nr_votes');
-        //    $votes = $votes + 1;
-        //    $choices[1]->fill([
-        //    'nr_votes' => $votes
-        //    ]);
-        //}
-        //redirect
+        
+        //Retrieve the nr of choices from the choice selected and add 1
+        
+        $choices= Choices::where('choice_to_poll', $id)->get();
+        
+        if(request()->input('choice_radio'.$id) == '1' || request()->input('choice_check'.$id) == '1')
+        {
+            $votes = $choices[0]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 1]
+                ])->value('nr_votes');
+            $votes = $votes + 1;
+            $choices[0]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 1]
+                ])->update([
+                'nr_votes' => $votes
+            ]);
+            $choices[0]->save();            
+        }
+        
+        if(request()->input('choice_radio'.$id) == '2' || request()->input('choice_check'.$id) == '2')
+        {
+            $votes = $choices[1]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 2]
+                ])->value('nr_votes');
+            $votes = $votes + 1;
+            $choices[1]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 2]
+                ])->update([
+                'nr_votes' => $votes
+            ]);
+            $choices[1]->save();
+        }
+
+        if(request()->input('choice_radio'.$id) == '3' || request()->input('choice_check'.$id) == '3')
+        {
+            $votes = $choices[2]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 3]
+                ])->value('nr_votes');
+            $votes = $votes + 1;
+            $choices[2]->where([
+                ['choice_to_poll', $id],
+                ['choice_id', 3]
+                ])->update([
+                'nr_votes' => $votes
+            ]);
+            $choices[2]->save();            
+        }
         return redirect()->action('listController@list');
     }
     

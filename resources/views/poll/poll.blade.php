@@ -39,25 +39,25 @@
                         <div class="col-8">
                             <div class="card mt-3">
                                 <h4 class="card-header text-center">{{ $poll->poll_name }}</h4>
-                                <form action="" method="post">
-                                {{ csrf_field() }}
-                                    <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
+                                <?php $choices = \App\Choices::where('choice_to_poll', '=', $poll->poll_id)->get();?>
+                                <div class="card-body">
+                                        <form action="" method="post">
+                                            {{ csrf_field() }}
+                                    <div class="d-flex justify-content-between">
                                             @if($poll->nr_choice === 1)
                                                 @foreach($choices as $choice)
-                                                    <input class="ml-auto my-auto" type="checkbox" id="{{$choice->choice_id}}" name="choice_check{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                                    <input class="ml-auto my-auto" type="checkbox" value="{{$choice->choice_id}}" name="choice_check{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
                                                 @endforeach
                                             @endif
                                             @if($poll->nr_choice === 0)
                                                 @foreach($choices as $choice)
-                                                    <input class="ml-auto my-auto" type="radio" id="{{$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
+                                                    <input class="ml-auto my-auto" type="radio" value="{{$choice->choice_id}}" name="choice_radio{{$poll->poll_id}}"><label class="mr-auto my-auto">{{ $choice->choice_text }}</label>
                                                 @endforeach
                                             @endif
-                                                <button class="btn btn-primary" type="submit">Vote</button>
-                                        </div>
+                                            <button class="btn btn-primary" type="submit">Vote</button>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <div class="col-2"></div>
